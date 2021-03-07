@@ -1,0 +1,59 @@
+scalar Point
+scalar Date
+scalar DateTime
+scalar Long
+
+type Note {
+  noteId: ID!
+  description: String!
+  title: String!
+  user: User @relationship(type: "HAS", direction: "IN")
+}
+
+type User {
+  createdAt: String!
+  createdBy: String!
+  name: String!
+  sub: String!
+  updatedAt: String!
+  updatedBy: String!
+  userId: ID!
+  has: [Note] @relationship(type: "HAS", direction: "OUT")
+}
+
+type Query {
+  """
+  A sample query to verify that our GraphQL server is online.
+
+  It returns the current timestamp.
+  """
+  ping: String!
+    @cypher(
+      statement: """
+      RETURN toString(datetime())
+      """
+    )
+
+  """
+  A sample query to verify that our GraphQL server is online.
+
+  It processes an authorized GraphQL request and returns a response.
+  """
+  helloAuth: String!
+
+  """
+  A sample query to return details for the authenticated user currently logged in to our system
+  """
+  me: User
+    @cypher(
+      statement: """
+      MATCH (u:User {sub: $jwt.sub})
+      RETURN u
+      """
+    )
+
+  """
+  A sample query to return the total number of users in our system
+  """
+  userCount: Int! @cypher(statement: "MATCH (u:User) RETURN COUNT(u)")
+}
