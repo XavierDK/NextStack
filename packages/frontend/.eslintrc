@@ -31,7 +31,7 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "ignorePatterns": ["examples/**/*"],
+  "ignorePatterns": ["**/dist/**/*"],
   "rules": {
     "prettier/prettier": "error",
     "no-console": [1, {

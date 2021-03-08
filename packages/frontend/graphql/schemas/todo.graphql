@@ -1,0 +1,24 @@
+type Todo {
+  id: ID!
+  text: String!
+  dueDate: DateTime!
+  completed: Boolean
+  user: User!
+}
+
+type TodoCount {
+  number: Int
+}
+
+type Query {
+  todoCountForUser(id: ID!): TodoCount
+    @custom(
+      dql: """
+      query q($id: string){
+         todoCountForUser(func: uid($id), first: 1) {
+             number: count(User.todos)
+         }
+      }
+      """
+    )
+}

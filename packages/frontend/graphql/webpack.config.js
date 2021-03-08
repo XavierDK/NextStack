@@ -4,7 +4,7 @@ module.exports = {
   // mode defaults to 'production' if not set
   mode: mode,
 
-  entry: './src/script.ts',
+  entry: './lambdas/resolvers.ts',
 
   module: {
     rules: [
@@ -20,5 +20,8 @@ module.exports = {
 
   resolve: {
     extensions: ['.ts', '.js']
+  },
+  output: {
+    filename: 'script.js'
   }
 };
