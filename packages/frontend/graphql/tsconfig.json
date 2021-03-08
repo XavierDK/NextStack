@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es6",   
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,    
+    "esModuleInterop": true,    
+    "moduleResolution": "node",
+    "lib": ["webworker", "es6", "scripthost"],
+    "module": "ES6"
+  },
+  "include": [    
+    "src/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ], 
+  "types": [
+    "lambda-types"
+  ]
+}

@@ -1,0 +1,41 @@
+version: '3.5'
+services:
+  zero:
+    image: dgraph/dgraph:latest
+    volumes:
+      - ~/dgraph:/dgraph
+    ports:
+      - 5080:5080
+      - 6080:6080
+    restart: on-failure
+    command: dgraph zero --my=zero:5080 --logtostderr
+
+  alpha:
+    image: dgraph/dgraph:latest
+    volumes:
+      - ~/dgraph:/dgraph
+    ports:
+      - 8080:8080
+      - 9080:9080
+    restart: on-failure
+    command: dgraph alpha --my=alpha:7080 --zero=zero:5080 --whitelist 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16 --logtostderr --graphql_lambda_url=http://lambda:8686/graphql-worker
+
+  lambda:
+    image: dgraph/dgraph-lambda:latest
+    ports:
+      - 8686:8686
+    depends_on:
+      - alpha
+    environment:
+      DGRAPH_URL: http://alpha:8080
+    volumes:
+      - type: bind
+        source: ./graphql/dist/main.js
+        target: /app/script/script.js
+        read_only: true
+
+  ratel:
+    image: dgraph/dgraph:latest
+    ports:
+      - 8000:8000
+    command: dgraph-ratel
