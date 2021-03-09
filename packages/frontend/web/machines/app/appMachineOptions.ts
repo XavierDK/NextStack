@@ -12,6 +12,9 @@ export default {
     launchInspect: (): void => {
       Storage.enableXStateInspect();
       location.reload();
+    },
+    launchPlayground: (): void => {
+      location.replace('/dev/playground');
     }
   }
 };

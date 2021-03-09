@@ -30,7 +30,7 @@ services:
       DGRAPH_URL: http://alpha:8080
     volumes:
       - type: bind
-        source: ./graphql/dist/main.js
+        source: ./graphql/dist/script.js
         target: /app/script/script.js
         read_only: true
 

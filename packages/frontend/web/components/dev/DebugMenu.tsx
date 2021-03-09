@@ -1,10 +1,10 @@
 import React, { ReactElement, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import SpeedDial from '@material-ui/core/SpeedDial';
-import { Build as BuildIcon, Timeline as XStateIcon } from '@material-ui/icons';
+import { Build as BuildIcon, Timeline as PlaygroundIcon, BubbleChart as XStateIcon } from '@material-ui/icons';
 import SpeedDialAction from '@material-ui/core/SpeedDialAction';
-import { AppEvent } from '../machines/app/appMachine';
-import useAppService from '../hooks/useAppState';
+import { AppEvent } from '../../machines/app/appMachine';
+import useAppService from '../../hooks/useAppState';
 
 const useStyles = makeStyles((theme) => ({
   speedDial: {
@@ -20,7 +20,10 @@ type Action = {
   event: AppEvent;
 };
 
-const actions: Action[] = [{ icon: <XStateIcon />, name: 'XState Inspect', event: { type: 'OPEN_XSTATE_INSPECT' } }];
+const actions: Action[] = [
+  { icon: <XStateIcon />, name: 'XState Inspect', event: { type: 'OPEN_XSTATE_INSPECT' } },
+  { icon: <PlaygroundIcon />, name: 'GraphQL Playground', event: { type: 'OPEN_PLAYGROUND' } }
+];
 
 const DebugMenu = (): ReactElement => {
   const classes = useStyles();

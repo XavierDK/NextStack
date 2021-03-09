@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import React, { ReactElement, useEffect } from 'react';
 import theme from '../web/constants/theme';
-import DebugMenu from '../web/components/DebugMenu';
+import DebugMenu from '../web/components/dev/DebugMenu';
 import '../web/utils/debug'; // Needed to make debug working
 import CacheProvider from '../web/utils/cache';
 import { UserProvider } from '@auth0/nextjs-auth0';

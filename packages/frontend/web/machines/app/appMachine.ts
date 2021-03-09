@@ -25,12 +25,8 @@ interface AppStateSchema {
         disabled: Record<string, never>;
         enabled: {
           states: {
-            xstateInspect: {
-              states: {
-                idle: Record<string, never>;
-                launch: Record<string, never>;
-              };
-            };
+            idle: Record<string, never>;
+            launch: Record<string, never>;
           };
         };
       };
@@ -51,6 +47,7 @@ export const loginUpdater = createUpdater<AppContext, LoginUpdateEvent>('USER_LO
 export type AppEvent =
   | { type: 'TOGGLE_DRAWER' }
   | { type: 'OPEN_XSTATE_INSPECT' }
+  | { type: 'OPEN_PLAYGROUND' }
   | LoginUpdateEvent
   | { type: 'USER_LOGOUT' };
 
@@ -117,21 +114,17 @@ export default Machine<AppContext, AppStateSchema, AppEvent>(
             always: [{ target: 'enabled', cond: 'isDebugEnabled' }]
           },
           enabled: {
-            type: 'parallel',
+            initial: 'idle',
             states: {
-              xstateInspect: {
-                initial: 'idle',
-                states: {
-                  idle: {
-                    entry: 'disableInspect',
-                    on: {
-                      OPEN_XSTATE_INSPECT: 'launch'
-                    }
-                  },
-                  launch: {
-                    entry: 'launchInspect'
-                  }
+              idle: {
+                entry: 'disableInspect',
+                on: {
+                  OPEN_XSTATE_INSPECT: 'launch',
+                  OPEN_PLAYGROUND: { actions: 'launchPlayground' }
                 }
+              },
+              launch: {
+                entry: 'launchInspect'
               }
             }
           }
