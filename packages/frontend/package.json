@@ -1,16 +1,11 @@
 {
-  "name": "my-app",
+  "name": "nextstack-frontend",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "clean": "rimraf dist",
-    "pretty": "prettier --write \"{components,pages,lib}/**/*.{js,jsx,ts,tsx}\"",
-    "lint": "eslint --fix --ext .ts \"{components,pages,lib}/**/*.{js,jsx,ts,tsx}\"",
+  "scripts": {    
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "schema": "curl -X POST localhost:8080/admin/schema --data-binary '@graphql/schema.graphql'",
-    "lambda": "docker run -it --rm -p 8686:8686 -v /Users/xdekoninck/Projects/Perso/nextstack/graphql/dist/main.js:/app/script/script.js -e DGRAPH_URL=http://host.docker.internal:8080 dgraph/dgraph-lambda"
+    "start": "next start"    
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "latest",
@@ -31,7 +26,7 @@
     "next": "latest",
     "postcss": "latest",
     "react": "latest",
-    "react-dom": "latest",
+    "react-dom": "latest",    
     "remark": "latest",
     "remark-html": "latest",
     "remark-react": "latest",
@@ -41,20 +36,10 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@types/webpack": "latest",
-    "@typescript-eslint/eslint-plugin": "latest",
-    "@typescript-eslint/parser": "latest",
-    "eslint": "latest",
-    "eslint-config-prettier": "latest",
-    "eslint-import-resolver-typescript": "latest",
-    "eslint-plugin-import": "latest",
-    "eslint-plugin-jsx-a11y": "latest",
-    "eslint-plugin-prettier": "latest",
-    "eslint-plugin-react": "latest",
-    "eslint-plugin-react-hooks": "latest",
-    "file-loader": "^6.2.0",
-    "graphql-playground-react": "^1.7.27",
-    "prettier": "latest",
+    "@types/webpack": "latest",    
+    "file-loader": "latest",
+    "graphql-playground-react": "latest",
+    "react-redux": "latest",
     "typescript": "latest"
   }
 }

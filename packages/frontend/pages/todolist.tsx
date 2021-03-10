@@ -1,6 +1,6 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, makeStyles } from '@material-ui/core';
 import React, { ReactElement } from 'react';
-import Layout from '../web/components/layout/Layout';
+import Layout from '../src/components/layout/Layout';
 
 const useStyles = makeStyles({
   table: {

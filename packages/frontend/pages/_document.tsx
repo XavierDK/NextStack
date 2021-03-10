@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
-import theme from '../web/constants/theme';
-import { extractCritical } from '../web/utils/cache';
-import { cleanCSS, prefixer } from '../web/utils/cleanCSS';
+import theme from '../src/constants/theme';
+import { extractCritical } from '../src/utils/cache';
+import { cleanCSS, prefixer } from '../src/utils/cleanCSS';
 
 export default class MyDocument extends Document {
   render(): ReactElement {

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import Head from 'next/head';
-import Layout from '../web/components/layout/Layout';
+import Layout from '../src/components/layout/Layout';
 import { Container } from '@material-ui/core';
 import unified from 'unified';
 import parse from 'remark-parse';
@@ -25,7 +25,7 @@ export default function Home({ content }: Props): ReactElement {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const dir = path.resolve('./README.md');
+  const dir = path.resolve('../../README.md');
   const fileContent = fs.readFileSync(dir, 'utf8');
   return {
     props: {

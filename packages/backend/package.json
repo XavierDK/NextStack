@@ -1,0 +1,30 @@
+{
+  "name": "nextstack-backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "concurrently \"npm run lambdas\" \"npm run schema:generate\"",
+    "dev": "concurrently \"npm run lambdas:watch\" \"npm run schema:generate:watch\" \"npm run schema:upload:watch\"",
+    "lambdas": "webpack --target=webworker",
+    "lambdas:watch": "webpack --target=webworker --watch",
+    "schema:generate": "node scripts/schemaScript.js",
+    "schema:generate:watch": "chokidar './schemas/**/*.graphql' -c 'node scripts/schemaScript.js'",
+    "schema:upload": "curl -X POST localhost:8080/admin/schema --data-binary @dist/__schema.graphql",
+    "schema:upload:watch": "chokidar 'dist/__schema.graphql' -c 'curl -X POST localhost:8080/admin/schema --data-binary @dist/__schema.graphql'"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "description": "",
+  "devDependencies": {
+    "@graphql-tools/load-files": "latest",
+    "@graphql-tools/merge": "latest",
+    "@slash-graphql/lambda-types": "latest",
+    "chokidar-cli": "latest",
+    "concurrently": "latest",
+    "ts-loader": "latest",
+    "typescript": "latest",
+    "webpack": "latest",
+    "webpack-cli": "latest"
+  }
+}
