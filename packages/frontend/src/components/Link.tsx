@@ -1,4 +1,9 @@
+//
+// Took from https://github.com/mui-org/material-ui/blob/next/examples/nextjs-with-typescript/src/Link.tsx
+//
+/* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -17,7 +22,6 @@ export const NextLinkComposed = React.forwardRef<HTMLAnchorElement, NextLinkComp
   props,
   ref
 ) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { to, linkAs, href, replace, scroll, passHref, shallow, prefetch, locale, ...other } = props;
 
   return (
@@ -47,7 +51,15 @@ export type LinkProps = {
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
 const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(props, ref) {
-  const { activeClassName = 'active', as: linkAs, className: classNameProps, href, noLinkStyle, ...other } = props;
+  const {
+    activeClassName = 'active',
+    as: linkAs,
+    className: classNameProps,
+    href,
+    noLinkStyle,
+    role, // Link don't have roles.
+    ...other
+  } = props;
 
   const router = useRouter();
   const pathname = typeof href === 'string' ? href : href.pathname;

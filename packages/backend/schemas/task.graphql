@@ -1,0 +1,23 @@
+type Task {
+  id: ID!
+  title: String!
+  completed: Boolean!
+  user: User!
+}
+
+type TaskCount {
+  number: Int
+}
+
+type Query {
+  taskCountForUser(id: ID!): TaskCount
+    @custom(
+      dql: """
+       query q($id: string){
+         taskCountForUser(func: uid($id), first: 1) {
+             number: count(User.tasks)
+         }
+      }
+      """
+    )
+}
