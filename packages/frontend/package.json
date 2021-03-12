@@ -2,12 +2,13 @@
   "name": "nextstack-frontend",
   "version": "0.1.0",
   "private": true,
-  "scripts": {    
+  "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"    
+    "start": "next start"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^4.0.0",
     "@auth0/nextjs-auth0": "latest",
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
@@ -22,21 +23,24 @@
     "clean-css": "latest",
     "core-js": "latest",
     "date-fns": "latest",
+    "graphql": "^15.5.0",
+    "graphql-tag": "^2.12.1",
     "immer": "latest",
     "next": "latest",
     "postcss": "latest",
-    "react": "latest",
-    "react-dom": "latest",    
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "remark": "latest",
     "remark-html": "latest",
     "remark-react": "latest",
     "xstate": "latest"
   },
   "devDependencies": {
+    "@types/clean-css": "^4.2.3",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@types/webpack": "latest",    
+    "@types/webpack": "latest",
     "file-loader": "latest",
     "graphql-playground-react": "latest",
     "react-redux": "latest",

@@ -27,8 +27,7 @@ type Query {
 }
 
 type User {
-  id: ID!
-  sub: String!
+  sub: String! @id
   email: String!
   name: String! @search(by: [term])
   tasks: [Task!] @hasInverse(field: user)

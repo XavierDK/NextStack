@@ -8,6 +8,8 @@ import '../src/utils/debug'; // Needed to make debug working
 import CacheProvider from '../src/utils/cache';
 import { UserProvider } from '@auth0/nextjs-auth0';
 import AppProvider from '../src/providers/AppProvider';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { apolloClient } from '../src/clients/apolloClient';
 
 export default function App(props: AppProps): ReactElement {
   const { Component, pageProps } = props;
@@ -23,16 +25,18 @@ export default function App(props: AppProps): ReactElement {
   return (
     <CacheProvider>
       <UserProvider>
-        <AppProvider>
-          <Head>
-            <link rel="icon" href="/favicon.ico" />
-            <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-          </Head>
-          <ThemeProvider theme={theme}>
-            <Component {...pageProps} />
-            <DebugMenu />
-          </ThemeProvider>
-        </AppProvider>
+        <ApolloProvider client={apolloClient}>
+          <AppProvider>
+            <Head>
+              <link rel="icon" href="/favicon.ico" />
+              <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+            </Head>
+            <ThemeProvider theme={theme}>
+              <Component {...pageProps} />
+              <DebugMenu />
+            </ThemeProvider>
+          </AppProvider>
+        </ApolloProvider>
       </UserProvider>
     </CacheProvider>
   );

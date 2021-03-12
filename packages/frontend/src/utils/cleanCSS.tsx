@@ -6,8 +6,11 @@
 //
 // It's using .browserslistrc
 
-export let prefixer: { process: (arg0: string, arg1: { from: any }) => any };
-export let cleanCSS: { minify: (arg0: string) => { (): any; new (): any; styles: string } };
+import Processor from 'postcss/lib/processor';
+import CleanCSS from 'clean-css';
+
+export let prefixer: Processor;
+export let cleanCSS: CleanCSS.MinifierOutput;
 
 if (process.env.NODE_ENV === 'production') {
   /* eslint-disable global-require, @typescript-eslint/no-var-requires */

@@ -18,6 +18,6 @@
     "prettier": "latest"
   },
   "scripts": {
-    "dev": "concurrently 'docker-compose up' 'lerna run dev --stream'"
+    "dev": "concurrently 'docker-compose up' 'lerna run dev --stream --no-bail'"
   }
 }

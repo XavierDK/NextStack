@@ -25,7 +25,7 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9)
 ];
 
-const todoList = (): ReactElement => {
+const TodoList = (): ReactElement => {
   const classes = useStyles();
   return (
     <Layout>
@@ -59,4 +59,4 @@ const todoList = (): ReactElement => {
   );
 };
 
-export default todoList;
+export default TodoList;

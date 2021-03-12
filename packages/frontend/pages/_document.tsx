@@ -52,45 +52,42 @@ MyDocument.getInitialProps = async (ctx) => {
   const materialSheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
-  try {
-    ctx.renderPage = () =>
-      originalRenderPage({
-        enhanceApp: (App) => (props) => materialSheets.collect(<App {...props} />)
-      });
+  ctx.renderPage = () =>
+    originalRenderPage({
+      enhanceApp: (App) => (props) => materialSheets.collect(<App {...props} />)
+    });
 
-    const initialProps = await Document.getInitialProps(ctx);
-    const emotionStyles = extractCritical(initialProps.html);
+  const initialProps = await Document.getInitialProps(ctx);
+  const emotionStyles = extractCritical(initialProps.html);
 
-    let css = materialSheets.toString();
-    // It might be undefined, e.g. after an error.
-    if (css && process.env.NODE_ENV === 'production') {
-      const result = await prefixer.process(css, { from: undefined });
-      css = result.css;
-      css = cleanCSS.minify(css).styles;
-    }
-
-    return {
-      ...initialProps,
-      // Styles fragment is rendered after the app and page rendering finish.
-      styles: [
-        <style
-          id="emotion-server-side"
-          key="emotion-server-side"
-          data-emotion={`css ${emotionStyles.ids.join(' ')}`}
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: emotionStyles.css }}
-        />,
-        <style
-          id="jss-server-side"
-          key="jss-server-side"
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: css }}
-        />,
-        <style id="material-icon-font" key="material-icon-font" />,
-        <style id="insertion-point-jss" key="insertion-point-jss" />,
-        ...React.Children.toArray(initialProps.styles)
-      ]
-    };
-  } finally {
+  let css = materialSheets.toString();
+  // It might be undefined, e.g. after an error.
+  if (css && process.env.NODE_ENV === 'production') {
+    const result = await prefixer.process(css, { from: undefined });
+    css = result.css;
+    css = cleanCSS.minify(css).styles;
   }
+
+  return {
+    ...initialProps,
+    // Styles fragment is rendered after the app and page rendering finish.
+    styles: [
+      <style
+        id="emotion-server-side"
+        key="emotion-server-side"
+        data-emotion={`css ${emotionStyles.ids.join(' ')}`}
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: emotionStyles.css }}
+      />,
+      <style
+        id="jss-server-side"
+        key="jss-server-side"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: css }}
+      />,
+      <style id="material-icon-font" key="material-icon-font" />,
+      <style id="insertion-point-jss" key="insertion-point-jss" />,
+      ...React.Children.toArray(initialProps.styles)
+    ]
+  };
 };
