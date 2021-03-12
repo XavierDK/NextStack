@@ -6,10 +6,10 @@ type Infos = {
 };
 
 const infos: Infos = {
-  siteName: 'NextJS Grandstack XState',
+  siteName: 'NextStack',
   siteUrl: 'http://localhost:3000',
-  description: 'NextJS Grandstack XState template ',
-  companyName: 'NextJS Grandstack XState'
+  description: 'NextStack Template',
+  companyName: 'NextStack'
 };
 
 export default infos;

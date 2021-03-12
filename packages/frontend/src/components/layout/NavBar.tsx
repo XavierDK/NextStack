@@ -50,12 +50,12 @@ const NavBar = (): ReactElement => {
           {infos.siteName}
         </Typography>
         {!isAuthenticated && (
-          <Button variant="contained" color="primary" component={Link} href="/api/auth/login">
+          <Button color="inherit" component={Link} href="/api/auth/login">
             Login
           </Button>
         )}
         {isAuthenticated && (
-          <Button variant="contained" color="primary" component={Link} href="/api/auth/logout">
+          <Button color="inherit" component={Link} href="/api/auth/logout">
             Logout
           </Button>
         )}
