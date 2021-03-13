@@ -5,6 +5,7 @@ import { Menu as MenuIcon } from '@material-ui/icons';
 import infos from '../../constants/infos';
 import Link from '../Link';
 import useAppState from '../../hooks/useAppState';
+import { useAuthUser } from 'next-firebase-auth';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (): ReactElement => {
   const classes = useStyles();
   const [current, send] = useAppState();
-
+  const { signOut } = useAuthUser();
   const isAuthenticated = current.matches('user.loggedIn');
 
   const toggleDrawer = () => send('TOGGLE_DRAWER');
@@ -50,12 +51,17 @@ const NavBar = (): ReactElement => {
           {infos.siteName}
         </Typography>
         {!isAuthenticated && (
-          <Button color="inherit" component={Link} href="/api/auth/login">
+          <Button color="inherit" component={Link} href="/auth">
             Login
           </Button>
         )}
         {isAuthenticated && (
-          <Button color="inherit" component={Link} href="/api/auth/logout">
+          <Button
+            color="inherit"
+            onClick={() => {
+              signOut();
+            }}
+          >
             Logout
           </Button>
         )}

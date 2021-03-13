@@ -1,7 +1,7 @@
 import { Interpreter, Machine, MachineConfig, PayloadSender, State } from 'xstate';
 import appMachineOptions from './appMachineOptions';
-import { UserProfile } from '@auth0/nextjs-auth0';
 import { createUpdater, ImmerUpdateEvent } from '@xstate/immer';
+import type Firebase from 'firebase';
 
 /**
  * The schema definition of the machine
@@ -38,7 +38,7 @@ interface AppStateSchema {
  * The events that the machine handles
  */
 
-type LoginUpdateEvent = ImmerUpdateEvent<'USER_LOGIN', UserProfile>;
+type LoginUpdateEvent = ImmerUpdateEvent<'USER_LOGIN', Firebase.User>;
 
 export const loginUpdater = createUpdater<AppContext, LoginUpdateEvent>('USER_LOGIN', (ctx, { input }) => {
   ctx.user = input;
@@ -56,7 +56,7 @@ export type AppEvent =
  */
 export interface AppContext {
   isDebugEnabled: boolean;
-  user: UserProfile;
+  user: Firebase.User;
 }
 
 /**

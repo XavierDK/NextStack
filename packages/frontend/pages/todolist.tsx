@@ -27,6 +27,7 @@ const rows = [
 
 const TodoList = (): ReactElement => {
   const classes = useStyles();
+
   return (
     <Layout>
       <TableContainer component={Paper}>

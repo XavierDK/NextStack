@@ -5,7 +5,7 @@ import Layout from '../src/components/layout/Layout';
 import Head from 'next/head';
 import { Container, Box, Typography, Button } from '@material-ui/core';
 
-export default function About(): React.ReactElement {
+function About(): React.ReactElement {
   return (
     <Layout>
       <Head>
@@ -25,3 +25,5 @@ export default function About(): React.ReactElement {
     </Layout>
   );
 }
+
+export default About;
