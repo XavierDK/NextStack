@@ -25,19 +25,23 @@ export const ADD_USER = gql`
 `;
 
 const createUser = async (email: string) => {
-  const { data } = await apolloClient.query({ query: GET_USER, variables: { email: email } });
-  if (data && data.getUser === null) {
-    await apolloClient.mutate({
-      mutation: ADD_USER,
-      variables: { user: { email: email } }
-    });
+  try {
+    const { data } = await apolloClient.query({ query: GET_USER, variables: { email: email } });
+    if (data && data.getUser === null) {
+      await apolloClient.mutate({
+        mutation: ADD_USER,
+        variables: { user: { email: email } }
+      });
+    }
+  } catch (error) {
+    console.log(error); // eslint-disable-line no-console
   }
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { AuthUser } = await setAuthCookies(req, res);
-    createUser(AuthUser.email);
+    await createUser(AuthUser.email);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);
